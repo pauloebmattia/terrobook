@@ -25,6 +25,10 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
+      - name: Obter data atual
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
       - name: Restaurar cache de data/ e reports/
         uses: actions/cache@v4
         with:
@@ -35,10 +39,6 @@ jobs:
           restore-keys: |
             terrobook-data-${{ runner.os }}-
 
-      - name: Obter data atual
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
       - name: Collect
         run: python -m src collect
 
@@ -48,6 +48,17 @@ jobs:
       - name: Generate
         run: python -m src generate
 
+      - name: Verificar conteúdo do site gerado
+        run: |
+          echo "=== Conteúdo de site/ ==="
+          ls -lh site/ || echo "Diretório site/ não encontrado!"
+          echo "=== index.html existe? ==="
+          test -f site/index.html && echo "SIM" || echo "NÃO"
+          echo "=== data/curated/ ==="
+          ls data/curated/ 2>/dev/null | wc -l | xargs echo "Itens aprovados:"
+          echo "=== data/raw/ ==="
+          ls data/raw/ 2>/dev/null || echo "Vazio"
+
       - name: Salvar cache de data/ e reports/
         uses: actions/cache/save@v4
         with:
@@ -55,13 +66,6 @@ jobs:
             data/
             reports/
           key: terrobook-data-${{ runner.os }}-${{ steps.date.outputs.date }}
-
-      - name: Verificar conteúdo do site gerado
-        run: |
-          echo "=== Conteúdo de site/ ==="
-          ls -lh site/ || echo "Diretório site/ não encontrado!"
-          echo "=== index.html existe? ==="
-          test -f site/index.html && echo "SIM" || echo "NÃO — deploy vai resultar em 404"
 
       - name: Deploy para GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

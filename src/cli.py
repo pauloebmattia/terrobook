@@ -128,13 +128,13 @@ def cmd_curate(args: argparse.Namespace) -> int:
 
     today = datetime.now(tz=timezone.utc).date()
     raw_store = RawStore(raw_dir)
-    noticias = raw_store.load(today)
+    noticias = raw_store.load_all()
 
     if not noticias:
-        print(f"[curate] Nenhuma notícia bruta encontrada para {today}.")
+        print(f"[curate] Nenhuma notícia bruta encontrada.")
         return 0
 
-    print(f"[curate] Avaliando {len(noticias)} notícias...")
+    print(f"[curate] Avaliando {len(noticias)} notícias (todos os arquivos em data/raw/)...")
 
     try:
         curador = Curador.from_config(Path("config/keywords.yaml"))
