@@ -56,11 +56,19 @@ jobs:
             reports/
           key: terrobook-data-${{ runner.os }}-${{ steps.date.outputs.date }}
 
+      - name: Verificar conteúdo do site gerado
+        run: |
+          echo "=== Conteúdo de site/ ==="
+          ls -lh site/ || echo "Diretório site/ não encontrado!"
+          echo "=== index.html existe? ==="
+          test -f site/index.html && echo "SIM" || echo "NÃO — deploy vai resultar em 404"
+
       - name: Deploy para GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
+          force_orphan: true
 
   report:
     runs-on: ubuntu-latest
