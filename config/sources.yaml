@@ -50,9 +50,9 @@ sources:
 
   - id: biblioteca_do_terror
     nome: "Biblioteca do Terror"
-    url: "https://bibliotecadoterror.com.br/feed/"
+    url: "https://www.bibliotecadoterror.com.br/feeds/posts/default"
     tipo: rss
-    ativo: false  # RSS malformado (invalid token)
+    ativo: true
 
   - id: grimoire_of_horror
     nome: "Grimoire of Horror"
