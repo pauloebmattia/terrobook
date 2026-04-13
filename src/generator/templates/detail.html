@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item.noticia.titulo }} — Terrobook Portal{% endblock %}
+
+{% block meta %}
+<meta name="description" content="{{ item.noticia.texto_resumido | truncate(160) }}">
+{% endblock %}
+
+{% block content %}
+<article aria-labelledby="detail-title">
+
+  <header class="detail-header">
+    <div class="detail-meta">
+      <span class="badge
+        {%- if item.categoria.value == 'Tradução Anunciada' %} badge-traducao
+        {%- elif item.categoria.value == 'Lançamento Previsto' %} badge-lancamento
+        {%- elif item.categoria.value == 'Novo Autor Nacional' %} badge-autor-nac
+        {%- elif item.categoria.value == 'Autor Internacional em Português' %} badge-autor-int
+        {%- else %} badge-geral
+        {%- endif %}">
+        {{ item.categoria.value }}
+      </span>
+      <time datetime="{{ item.aprovado_em.strftime('%Y-%m-%d') }}">
+        {{ item.aprovado_em.strftime('%d/%m/%Y') }}
+      </time>
+      {% if item.generos %}
+      <div class="genre-tags">
+        {% for genero in item.generos %}
+        <span class="genre-tag">{{ genero.value.replace('_', ' ') }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <h1 id="detail-title" class="detail-title">{{ item.noticia.titulo }}</h1>
+  </header>
+
+  {# Campos enriquecidos disponíveis #}
+  {% set has_fields = item.titulo_original or item.autor or item.editora or item.data_prevista %}
+  {% if has_fields %}
+  <div class="detail-fields">
+    {% if item.titulo_original %}
+    <div class="field-item">
+      <span class="field-label">Título Original</span>
+      <span class="field-value">{{ item.titulo_original }}</span>
+    </div>
+    {% endif %}
+    {% if item.autor %}
+    <div class="field-item">
+      <span class="field-label">Autor</span>
+      <span class="field-value">{{ item.autor }}</span>
+    </div>
+    {% endif %}
+    {% if item.editora %}
+    <div class="field-item">
+      <span class="field-label">Editora</span>
+      <span class="field-value">{{ item.editora }}</span>
+    </div>
+    {% endif %}
+    {% if item.data_prevista %}
+    <div class="field-item">
+      <span class="field-label">Previsão de Lançamento</span>
+      <span class="field-value">{{ item.data_prevista }}</span>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {# Sinopse #}
+  {% if item.sinopse %}
+  <blockquote class="detail-sinopse">{{ item.sinopse }}</blockquote>
+  {% endif %}
+
+  {# Resumo da notícia #}
+  <p style="margin-bottom: 1.5rem; line-height: 1.75;">
+    {{ item.noticia.texto_resumido }}
+  </p>
+
+  {# Link para a fonte original #}
+  <a class="source-link" href="{{ item.noticia.url }}" target="_blank" rel="noopener noreferrer">
+    ↗ Ver fonte original
+  </a>
+
+</article>
+
+{# Itens relacionados #}
+{% if related_items %}
+<section class="related-section" aria-labelledby="related-heading">
+  <h2 id="related-heading" class="section-title">Relacionados</h2>
+  <div class="items-grid">
+    {% for rel in related_items %}
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge
+          {%- if rel.categoria.value == 'Tradução Anunciada' %} badge-traducao
+          {%- elif rel.categoria.value == 'Lançamento Previsto' %} badge-lancamento
+          {%- elif rel.categoria.value == 'Novo Autor Nacional' %} badge-autor-nac
+          {%- elif rel.categoria.value == 'Autor Internacional em Português' %} badge-autor-int
+          {%- else %} badge-geral
+          {%- endif %}">
+          {{ rel.categoria.value }}
+        </span>
+        <time class="item-date" datetime="{{ rel.aprovado_em.strftime('%Y-%m-%d') }}">
+          {{ rel.aprovado_em.strftime('%d/%m/%Y') }}
+        </time>
+      </div>
+      <h3 class="item-title">
+        <a href="/item/{{ rel.id }}.html">{{ rel.noticia.titulo }}</a>
+      </h3>
+      <p class="item-excerpt">{{ rel.noticia.texto_resumido | truncate(140) }}</p>
+      <a class="item-readmore" href="/item/{{ rel.id }}.html">Ler mais →</a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

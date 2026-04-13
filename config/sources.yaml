@@ -1,0 +1,80 @@
+# Fontes monitoradas pelo Coletor do Terrobook Portal
+# Categorias obrigatórias: editoras BR, portais de resenha, blogs, redes sociais, agregadores internacionais
+
+sources:
+
+  # --- Editoras brasileiras especializadas ---
+  - id: darkside
+    nome: "Darkside Books"
+    url: "https://darksidebooks.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: intrinseca
+    nome: "Intrínseca"
+    url: "https://www.intrinseca.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: aleph
+    nome: "Aleph"
+    url: "https://www.editoraaleph.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: novo_seculo
+    nome: "Novo Século"
+    url: "https://www.novoseculo.com.br/blog/feed/"
+    tipo: rss
+    ativo: true
+
+  # --- Portais de resenhas literárias ---
+  - id: skoob_terror
+    nome: "Skoob — Terror/Suspense"
+    url: "https://www.skoob.com.br/livro/lista/genero:terror"
+    tipo: html
+    ativo: true
+    seletores:
+      container: ".book-item"
+      titulo: ".book-title"
+      url: "a.book-link"
+      resumo: ".book-synopsis"
+
+  - id: leitores_com_br
+    nome: "Leitores.com.br"
+    url: "https://www.leitores.com.br/noticias/feed/"
+    tipo: rss
+    ativo: true
+
+  # --- Blogs e canais especializados ---
+  - id: medo_literatura
+    nome: "Medo & Literatura"
+    url: "https://medoeliteratura.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: biblioteca_do_terror
+    nome: "Biblioteca do Terror"
+    url: "https://bibliotecadoterror.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  # --- Redes sociais (perfis oficiais de editoras) ---
+  - id: darkside_instagram
+    nome: "Darkside Books — Instagram (RSS via Nitter/RSS bridge)"
+    url: "https://rss.example.com/darkside_books"
+    tipo: rss
+    ativo: false  # Requer configuração de RSS bridge
+
+  # --- Agregadores internacionais ---
+  - id: publishers_weekly
+    nome: "Publishers Weekly — Horror"
+    url: "https://www.publishersweekly.com/pw/feeds/genre/horror.xml"
+    tipo: rss
+    ativo: true
+
+  - id: tor_com
+    nome: "Tor.com"
+    url: "https://www.tor.com/feed/"
+    tipo: rss
+    ativo: true

@@ -1,0 +1,64 @@
+# Configurações gerais do Terrobook Portal
+
+pipeline:
+  # Frequência de varredura (usado pelo GitHub Actions cron)
+  frequencia_varredura: "daily"  # daily | hourly | manual
+
+  # Limiar de confiança para aprovação automática (0.0 a 1.0)
+  # Abaixo deste valor, o item vai para revisão manual
+  limiar_confianca: 0.6
+
+  # Número máximo de notícias por fonte por ciclo
+  max_noticias_por_fonte: 50
+
+  # Timeout de requisição HTTP em segundos
+  timeout_http: 30
+
+  # Número de tentativas em caso de falha de rede
+  max_retries: 3
+
+storage:
+  # Diretório raiz de dados
+  data_dir: "data"
+
+  # Subdiretórios
+  raw_dir: "data/raw"
+  curated_dir: "data/curated"
+  pending_review_dir: "data/pending_review"
+  discarded_dir: "data/discarded"
+  seen_urls_file: "data/seen_urls.json"
+
+  # Diretório de relatórios
+  reports_dir: "reports"
+
+generator:
+  # Diretório de saída do site estático
+  output_dir: "site"
+
+  # Diretório de templates Jinja2
+  templates_dir: "src/generator/templates"
+
+  # Número de itens na página inicial
+  itens_por_pagina: 20
+
+  # Título do site
+  site_title: "Terrobook Portal"
+  site_description: "Curadoria de notícias sobre literatura de terror, suspense, thriller, mistério, weird fiction e true crime em português"
+  site_url: "https://terrobook.github.io"
+
+  # Feed RSS
+  rss_max_items: 50
+
+  # JSON API
+  json_api_max_items: 100
+
+deploy:
+  # Plataforma de deploy: github_pages | vercel | netlify
+  plataforma: "github_pages"
+
+  # Branch de deploy (GitHub Pages)
+  branch: "gh-pages"
+
+logging:
+  level: "INFO"  # DEBUG | INFO | WARNING | ERROR
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"

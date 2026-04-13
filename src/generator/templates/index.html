@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Terrobook Portal — Curadoria de Terror &amp; Suspense{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Os últimos lançamentos, traduções e notícias sobre literatura de terror, suspense, thriller, mistério, weird fiction e true crime em português.">
+{% endblock %}
+
+{% block content %}
+<section aria-labelledby="page-heading">
+  <h1 id="page-heading" class="page-heading">Últimas Notícias</h1>
+  <p class="page-subheading">
+    Curadoria de lançamentos, traduções e novidades do universo do terror e suspense em português.
+  </p>
+
+  {% if items %}
+  <div class="items-grid">
+    {% for item in items %}
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge
+          {%- if item.categoria.value == 'Tradução Anunciada' %} badge-traducao
+          {%- elif item.categoria.value == 'Lançamento Previsto' %} badge-lancamento
+          {%- elif item.categoria.value == 'Novo Autor Nacional' %} badge-autor-nac
+          {%- elif item.categoria.value == 'Autor Internacional em Português' %} badge-autor-int
+          {%- else %} badge-geral
+          {%- endif %}">
+          {{ item.categoria.value }}
+        </span>
+        <time class="item-date" datetime="{{ item.aprovado_em.strftime('%Y-%m-%d') }}">
+          {{ item.aprovado_em.strftime('%d/%m/%Y') }}
+        </time>
+      </div>
+
+      {% if item.generos %}
+      <div class="genre-tags">
+        {% for genero in item.generos %}
+        <span class="genre-tag">{{ genero.value.replace('_', ' ') }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <h2 class="item-title">
+        <a href="/item/{{ item.id }}.html">{{ item.noticia.titulo }}</a>
+      </h2>
+
+      <p class="item-excerpt">
+        {{ item.noticia.texto_resumido | truncate(180) }}
+      </p>
+
+      <a class="item-readmore" href="/item/{{ item.id }}.html" aria-label="Ler mais sobre {{ item.noticia.titulo }}">
+        Ler mais →
+      </a>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p style="color: var(--text-muted); margin-top: 2rem;">Nenhum item publicado ainda.</p>
+  {% endif %}
+</section>
+{% endblock %}

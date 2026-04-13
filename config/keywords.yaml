@@ -1,0 +1,86 @@
+# Palavras-chave para curadoria do Terrobook Portal
+# Usadas pelo Curador para calcular score de relevância
+
+por_genero:
+  terror:
+    - terror
+    - horror
+    - assombração
+    - sobrenatural
+    - medo
+    - pesadelo
+    - macabro
+    - gótico
+    - slasher
+    - lovecraftiano
+    - weird fiction
+    - cosmic horror
+  suspense:
+    - suspense
+    - tensão
+    - thriller psicológico
+    - angústia
+    - cliffhanger
+  thriller:
+    - thriller
+    - conspiração
+    - espionagem
+    - perseguição
+    - assassino
+    - serial killer
+  misterio:
+    - mistério
+    - detetive
+    - investigação
+    - crime
+    - whodunit
+    - noir
+  weird_fiction:
+    - weird fiction
+    - estranheza
+    - bizarro
+    - new weird
+    - surreal
+    - lovecraft
+    - cthulhu
+  true_crime:
+    - true crime
+    - crime real
+    - documentário criminal
+    - caso real
+    - assassinato real
+
+por_evento:
+  lancamento:
+    - lançamento
+    - lança
+    - publicação
+    - estreia
+    - disponível
+    - chega às livrarias
+    - pré-venda
+    - pré-lançamento
+    - data de lançamento
+  traducao:
+    - tradução
+    - traduzido
+    - versão em português
+    - edição brasileira
+    - edição portuguesa
+    - chegando ao Brasil
+    - direitos adquiridos
+    - será publicado no Brasil
+    - anuncia tradução
+  autor:
+    - autor
+    - escritor
+    - estreia literária
+    - novo livro
+    - obra inédita
+    - debut
+    - autor nacional
+    - autor brasileiro
+    - autor internacional
+
+# Limiar de confiança padrão (sobrescrito por settings.yaml)
+limiar_confianca: 0.6

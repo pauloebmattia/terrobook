@@ -1,0 +1,81 @@
+name: Terrobook Portal Pipeline
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Restaurar cache de data/ e reports/
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/
+            reports/
+          key: terrobook-data-${{ runner.os }}-${{ steps.date.outputs.date }}
+          restore-keys: |
+            terrobook-data-${{ runner.os }}-
+
+      - name: Obter data atual
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Collect
+        run: python -m src collect
+
+      - name: Curate
+        run: python -m src curate
+
+      - name: Generate
+        run: python -m src generate
+
+      - name: Salvar cache de data/ e reports/
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/
+            reports/
+          key: terrobook-data-${{ runner.os }}-${{ steps.date.outputs.date }}
+
+      - name: Deploy para GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+
+  report:
+    runs-on: ubuntu-latest
+    needs: pipeline
+    if: always()
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Listar arquivos de relatório gerados
+        run: |
+          echo "=== Relatórios gerados ==="
+          if [ -d reports ]; then
+            ls -lh reports/ || echo "Nenhum relatório encontrado."
+          else
+            echo "Diretório reports/ não encontrado."
+          fi

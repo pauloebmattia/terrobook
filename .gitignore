@@ -1,0 +1,15 @@
+# Dados coletados e processados (gerados automaticamente)
+data/raw/
+data/curated/
+data/pending_review/
+data/discarded/
+data/seen_urls.json
+
+# Site gerado
+site/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.hypothesis/
