@@ -1,11 +1,8 @@
-# Dados coletados e processados (gerados automaticamente)
+# Dados brutos (descartáveis, não precisam persistir)
 data/raw/
-data/curated/
-data/pending_review/
 data/discarded/
-data/seen_urls.json
 
-# Site gerado
+# Site gerado (publicado via gh-pages)
 site/
 
 # Python

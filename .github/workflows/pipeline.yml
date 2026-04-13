@@ -25,20 +25,6 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
-      - name: Obter data atual
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-      - name: Restaurar cache de data/ e reports/
-        uses: actions/cache@v4
-        with:
-          path: |
-            data/
-            reports/
-          key: terrobook-data-${{ runner.os }}-${{ steps.date.outputs.date }}
-          restore-keys: |
-            terrobook-data-${{ runner.os }}-
-
       - name: Collect
         run: python -m src collect
 
@@ -48,30 +34,19 @@ jobs:
       - name: Generate
         run: python -m src generate
 
-      - name: Diagnóstico completo
+      - name: Diagnóstico
         run: |
-          echo "=== data/raw/ ==="
-          ls data/raw/ 2>/dev/null || echo "VAZIO"
-          echo "=== Notícias brutas coletadas ==="
-          cat data/raw/*.json 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d)} notícias'); [print(' -', n['titulo'][:80]) for n in d[:5]]" || echo "Nenhum arquivo raw"
-          echo "=== data/curated/ ==="
-          ls data/curated/ 2>/dev/null | wc -l | xargs echo "Aprovados:"
-          echo "=== data/pending_review/ ==="
-          ls data/pending_review/ 2>/dev/null | wc -l | xargs echo "Pendentes:"
-          echo "=== data/discarded/ ==="
-          ls data/discarded/ 2>/dev/null | wc -l | xargs echo "Descartados:"
-          echo "=== site/ ==="
-          ls -lh site/ || echo "VAZIO"
-          echo "=== index.html existe? ==="
-          test -f site/index.html && echo "SIM" || echo "NÃO"
+          echo "=== data/curated/ ===" && ls data/curated/ 2>/dev/null | wc -l | xargs echo "Aprovados:"
+          echo "=== data/pending_review/ ===" && ls data/pending_review/ 2>/dev/null | wc -l | xargs echo "Pendentes:"
+          echo "=== site/ ===" && ls -lh site/ || echo "VAZIO"
 
-      - name: Salvar cache de data/ e reports/
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            data/
-            reports/
-          key: terrobook-data-${{ runner.os }}-${{ steps.date.outputs.date }}
+      - name: Commitar dados persistentes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/curated/ data/pending_review/ data/seen_urls.json reports/ || true
+          git diff --staged --quiet || git commit -m "chore: atualiza dados curados [skip ci]"
+          git push || true
 
       - name: Deploy para GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -84,16 +59,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: pipeline
     if: always()
-
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
-
-      - name: Listar arquivos de relatório gerados
-        run: |
-          echo "=== Relatórios gerados ==="
-          if [ -d reports ]; then
-            ls -lh reports/ || echo "Nenhum relatório encontrado."
-          else
-            echo "Diretório reports/ não encontrado."
-          fi
+      - name: Relatórios
+        run: ls -lh reports/ 2>/dev/null || echo "Nenhum relatório."
