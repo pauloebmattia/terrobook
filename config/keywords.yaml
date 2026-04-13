@@ -1,5 +1,6 @@
 # Palavras-chave para curadoria do Terrobook Portal
 # Usadas pelo Curador para calcular score de relevância
+# Inclui termos em português e inglês (fontes internacionais)
 
 por_genero:
   terror:
@@ -15,12 +16,22 @@ por_genero:
     - lovecraftiano
     - weird fiction
     - cosmic horror
+    - haunted
+    - ghost
+    - supernatural
+    - scary
+    - frightening
+    - creepy
+    - dark fiction
+    - gothic
   suspense:
     - suspense
     - tensão
     - thriller psicológico
     - angústia
     - cliffhanger
+    - psychological
+    - tension
   thriller:
     - thriller
     - conspiração
@@ -28,6 +39,8 @@ por_genero:
     - perseguição
     - assassino
     - serial killer
+    - mystery thriller
+    - crime thriller
   misterio:
     - mistério
     - detetive
@@ -35,6 +48,9 @@ por_genero:
     - crime
     - whodunit
     - noir
+    - mystery
+    - detective
+    - investigation
   weird_fiction:
     - weird fiction
     - estranheza
@@ -43,6 +59,8 @@ por_genero:
     - surreal
     - lovecraft
     - cthulhu
+    - eldritch
+    - cosmic
   true_crime:
     - true crime
     - crime real
@@ -61,6 +79,14 @@ por_evento:
     - pré-venda
     - pré-lançamento
     - data de lançamento
+    - release
+    - publishing
+    - new book
+    - coming soon
+    - out now
+    - book release
+    - announced
+    - debut novel
   traducao:
     - tradução
     - traduzido
@@ -71,6 +97,10 @@ por_evento:
     - direitos adquiridos
     - será publicado no Brasil
     - anuncia tradução
+    - translation
+    - translated
+    - portuguese edition
+    - rights acquired
   autor:
     - autor
     - escritor
@@ -81,6 +111,10 @@ por_evento:
     - autor nacional
     - autor brasileiro
     - autor internacional
+    - author
+    - writer
+    - novelist
 
-# Limiar de confiança padrão (sobrescrito por settings.yaml)
-limiar_confianca: 0.6
+# Limiar de confiança — reduzido para capturar mais conteúdo das fontes internacionais
+# Itens abaixo deste valor vão para revisão manual (pending_review)
+limiar_confianca: 0.1

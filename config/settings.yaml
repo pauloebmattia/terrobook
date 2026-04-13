@@ -6,7 +6,7 @@ pipeline:
 
   # Limiar de confiança para aprovação automática (0.0 a 1.0)
   # Abaixo deste valor, o item vai para revisão manual
-  limiar_confianca: 0.6
+  limiar_confianca: 0.1
 
   # Número máximo de notícias por fonte por ciclo
   max_noticias_por_fonte: 50
