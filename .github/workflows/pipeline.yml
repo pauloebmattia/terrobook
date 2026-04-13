@@ -48,16 +48,22 @@ jobs:
       - name: Generate
         run: python -m src generate
 
-      - name: Verificar conteúdo do site gerado
+      - name: Diagnóstico completo
         run: |
-          echo "=== Conteúdo de site/ ==="
-          ls -lh site/ || echo "Diretório site/ não encontrado!"
+          echo "=== data/raw/ ==="
+          ls data/raw/ 2>/dev/null || echo "VAZIO"
+          echo "=== Notícias brutas coletadas ==="
+          cat data/raw/*.json 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d)} notícias'); [print(' -', n['titulo'][:80]) for n in d[:5]]" || echo "Nenhum arquivo raw"
+          echo "=== data/curated/ ==="
+          ls data/curated/ 2>/dev/null | wc -l | xargs echo "Aprovados:"
+          echo "=== data/pending_review/ ==="
+          ls data/pending_review/ 2>/dev/null | wc -l | xargs echo "Pendentes:"
+          echo "=== data/discarded/ ==="
+          ls data/discarded/ 2>/dev/null | wc -l | xargs echo "Descartados:"
+          echo "=== site/ ==="
+          ls -lh site/ || echo "VAZIO"
           echo "=== index.html existe? ==="
           test -f site/index.html && echo "SIM" || echo "NÃO"
-          echo "=== data/curated/ ==="
-          ls data/curated/ 2>/dev/null | wc -l | xargs echo "Itens aprovados:"
-          echo "=== data/raw/ ==="
-          ls data/raw/ 2>/dev/null || echo "Vazio"
 
       - name: Salvar cache de data/ e reports/
         uses: actions/cache/save@v4
