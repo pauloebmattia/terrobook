@@ -39,15 +39,8 @@ class Curador:
         if categoria is None:
             categoria = Categoria.NOTICIA_GERAL
 
-        if score < self.config.limiar_confianca:
-            return ResultadoCuradoria(
-                noticia=noticia,
-                status=StatusCuradoria.PENDENTE_REVISAO,
-                score=score,
-                categoria=categoria,
-                motivo_rejeicao=None,
-            )
-
+        # Qualquer score > 0 é aprovado automaticamente
+        # (PENDENTE_REVISAO reservado para revisão manual via CLI)
         return ResultadoCuradoria(
             noticia=noticia,
             status=StatusCuradoria.APROVADO,
