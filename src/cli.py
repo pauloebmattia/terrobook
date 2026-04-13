@@ -203,8 +203,7 @@ def cmd_generate(args: argparse.Namespace) -> int:
     items = curated_store.load_approved()
 
     if not items:
-        print("[generate] Nenhum item aprovado encontrado.")
-        return 0
+        print("[generate] Nenhum item aprovado encontrado. Gerando site vazio...")
 
     print(f"[generate] Gerando site com {len(items)} item(ns) aprovado(s)...")
 
