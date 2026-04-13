@@ -200,10 +200,10 @@ def cmd_generate(args: argparse.Namespace) -> int:
         return 1
 
     curated_store = CuratedStore(curated_dir=curated_dir)
-    items = curated_store.load_approved()
+    items = curated_store.load_approved() + curated_store.load_pending()
 
     if not items:
-        print("[generate] Nenhum item aprovado encontrado. Gerando site vazio...")
+        print("[generate] Nenhum item aprovado ou pendente encontrado. Gerando site vazio...")
 
     print(f"[generate] Gerando site com {len(items)} item(ns) aprovado(s)...")
 

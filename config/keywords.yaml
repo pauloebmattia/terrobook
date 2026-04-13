@@ -115,6 +115,6 @@ por_evento:
     - writer
     - novelist
 
-# Limiar de confiança — reduzido para capturar mais conteúdo das fontes internacionais
-# Itens abaixo deste valor vão para revisão manual (pending_review)
-limiar_confianca: 0.1
+# Limiar de confiança — muito baixo para aprovação automática
+# Qualquer notícia com ao menos uma keyword relevante é aprovada
+limiar_confianca: 0.01
