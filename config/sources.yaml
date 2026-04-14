@@ -66,7 +66,24 @@ sources:
     tipo: rss
     ativo: true
 
-  # --- Redes sociais (perfis oficiais de editoras) ---
+  - id: mundo_sombrio
+    nome: "Mundo Sombrio"
+    url: "https://mundosombrio.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: rocco
+    nome: "Editora Rocco"
+    url: "https://www.rocco.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: leitor_compulsivo
+    nome: "Leitor Compulsivo"
+    url: "https://leitorcompulsivo.com.br/feed/"
+    tipo: rss
+    ativo: true
+
   - id: darkside_instagram
     nome: "Darkside Books — Instagram (RSS via RSS bridge)"
     url: "https://rss.example.com/darkside_books"
