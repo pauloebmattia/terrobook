@@ -65,13 +65,15 @@ class BuildResult:
 class Gerador:
     """Gera o site estático do Terrobook Portal a partir de itens curados."""
 
-    def __init__(self, templates_dir: Path, output_dir: Path) -> None:
+    def __init__(self, templates_dir: Path, output_dir: Path, base_path: str = "") -> None:
         self.templates_dir = templates_dir
         self.output_dir = output_dir
+        self.base_path = base_path.rstrip("/")
         self._env = Environment(
             loader=FileSystemLoader(str(templates_dir)),
             autoescape=select_autoescape(["html", "xml"]),
         )
+        self._env.globals["base_path"] = self.base_path
 
     # ------------------------------------------------------------------
     # Renderização de páginas HTML
@@ -287,4 +289,5 @@ class Gerador:
         generator_cfg = config.get("generator", {})
         templates_dir = Path(generator_cfg.get("templates_dir", "src/generator/templates"))
         output_dir = Path(generator_cfg.get("output_dir", "site"))
-        return cls(templates_dir=templates_dir, output_dir=output_dir)
+        base_path = generator_cfg.get("base_path", "")
+        return cls(templates_dir=templates_dir, output_dir=output_dir, base_path=base_path)

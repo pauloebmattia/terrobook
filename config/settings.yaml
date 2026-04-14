@@ -44,7 +44,8 @@ generator:
   # Título do site
   site_title: "Terrobook Portal"
   site_description: "Curadoria de notícias sobre literatura de terror, suspense, thriller, mistério, weird fiction e true crime em português"
-  site_url: "https://terrobook.github.io"
+  site_url: "https://pauloebmattia.github.io/terrobook"
+  base_path: "/terrobook"
 
   # Feed RSS
   rss_max_items: 50
