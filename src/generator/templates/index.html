@@ -41,15 +41,15 @@
       {% endif %}
 
       <h2 class="item-title">
-        <a href="{{ base_path }}/item/{{ item.id }}.html">{{ item.noticia.titulo }}</a>
+        <a href="{{ item.noticia.url }}" target="_blank" rel="noopener noreferrer">{{ item.noticia.titulo }}</a>
       </h2>
 
       <p class="item-excerpt">
         {{ item.noticia.texto_resumido | truncate(180) }}
       </p>
 
-      <a class="item-readmore" href="{{ base_path }}/item/{{ item.id }}.html" aria-label="Ler mais sobre {{ item.noticia.titulo }}">
-        Ler mais →
+      <a class="item-readmore" href="{{ item.noticia.url }}" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre {{ item.noticia.titulo }}">
+        Ler na fonte →
       </a>
     </article>
     {% endfor %}

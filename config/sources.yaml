@@ -1,14 +1,13 @@
 # Fontes monitoradas pelo Coletor do Terrobook Portal
-# Categorias obrigatórias: editoras BR, portais de resenha, blogs, redes sociais, agregadores internacionais
 
 sources:
 
-  # --- Editoras brasileiras especializadas ---
+  # --- Editoras brasileiras ---
   - id: darkside
     nome: "Darkside Books"
     url: "https://darksidebooks.com.br/feed/"
     tipo: rss
-    ativo: false  # Bloqueia bots no GitHub Actions (Connection refused)
+    ativo: false  # Bloqueia bots (Connection refused)
 
   - id: intrinseca
     nome: "Intrínseca"
@@ -16,41 +15,60 @@ sources:
     tipo: rss
     ativo: true
 
-  - id: aleph
-    nome: "Aleph"
-    url: "https://www.editoraaleph.com.br/feed/"
+  - id: rocco
+    nome: "Editora Rocco"
+    url: "https://www.rocco.com.br/feed/"
     tipo: rss
-    ativo: false  # RSS malformado (mismatched tag)
+    ativo: true
 
-  - id: novo_seculo
-    nome: "Novo Século"
-    url: "https://www.novoseculo.com.br/blog/feed/"
-    tipo: rss
-    ativo: false  # Certificado SSL inválido
-
-  # --- Portais de resenhas literárias ---
-  - id: skoob_terror
-    nome: "Skoob — Terror/Suspense"
-    url: "https://www.skoob.com.br/livro/lista/genero:terror"
-    tipo: html
-    ativo: false  # Seletores desatualizados — requer inspeção manual do HTML atual
-
-  - id: leitores_com_br
-    nome: "Leitores.com.br"
-    url: "https://www.leitores.com.br/noticias/feed/"
-    tipo: rss
-    ativo: false  # RSS malformado (syntax error)
-
-  # --- Blogs e canais especializados ---
-  - id: medo_literatura
-    nome: "Medo & Literatura"
-    url: "https://medoeliteratura.com.br/feed/"
-    tipo: rss
-    ativo: false  # Domínio não existe mais
-
+  # --- Blogs especializados em terror/suspense BR ---
   - id: biblioteca_do_terror
     nome: "Biblioteca do Terror"
     url: "https://www.bibliotecadoterror.com.br/feeds/posts/default"
+    tipo: rss
+    ativo: true
+
+  - id: darkside_blog
+    nome: "Darkside Blog"
+    url: "https://darkside.blog.br/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: mundo_sombrio
+    nome: "Mundo Sombrio"
+    url: "https://mundosombrio.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  # --- Blogs gerais de livros BR ---
+  - id: leitor_compulsivo
+    nome: "Leitor Compulsivo"
+    url: "https://leitorcompulsivo.com.br/feed/"
+    tipo: rss
+    ativo: true
+
+  # --- Revistas e portais especializados internacionais ---
+  - id: tor_com_horror
+    nome: "Tor.com — Horror"
+    url: "https://www.tor.com/tag/horror/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: nightmare_magazine
+    nome: "Nightmare Magazine"
+    url: "https://www.nightmare-magazine.com/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: locus_magazine
+    nome: "Locus Magazine"
+    url: "https://locusmag.com/feed/"
+    tipo: rss
+    ativo: true
+
+  - id: book_riot_horror
+    nome: "Book Riot — Horror"
+    url: "https://bookriot.com/tag/horror/feed/"
     tipo: rss
     ativo: true
 
@@ -66,51 +84,8 @@ sources:
     tipo: rss
     ativo: true
 
-  - id: mundo_sombrio
-    nome: "Mundo Sombrio"
-    url: "https://mundosombrio.com.br/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: rocco
-    nome: "Editora Rocco"
-    url: "https://www.rocco.com.br/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: leitor_compulsivo
-    nome: "Leitor Compulsivo"
-    url: "https://leitorcompulsivo.com.br/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: darkside_instagram
-    nome: "Darkside Books — Instagram (RSS via RSS bridge)"
-    url: "https://rss.example.com/darkside_books"
-    tipo: rss
-    ativo: false  # Requer configuração de RSS bridge
-
-  # --- Agregadores internacionais ---
-  - id: publishers_weekly
-    nome: "Publishers Weekly — Horror"
-    url: "https://www.publishersweekly.com/pw/feeds/genre/horror.xml"
-    tipo: rss
-    ativo: false  # RSS malformado no servidor deles
-
-  - id: tor_com
-    nome: "Tor.com"
-    url: "https://www.tor.com/feed/"
-    tipo: rss
-    ativo: true
-
   - id: giant_freakin_robot_horror
     nome: "Giant Freakin Robot — Horror"
     url: "https://www.giantfreakinrobot.com/topic/horror/feed"
-    tipo: rss
-    ativo: true
-
-  - id: random_house_horror
-    nome: "Random House — Horror"
-    url: "https://www.randomhousebooks.com/editor-category/horror/feed/"
     tipo: rss
     ativo: true

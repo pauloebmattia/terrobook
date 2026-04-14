@@ -1,5 +1,4 @@
 # Palavras-chave para curadoria do Terrobook Portal
-# Usadas pelo Curador para calcular score de relevância
 # Inclui termos em português e inglês (fontes internacionais)
 
 por_genero:
@@ -20,27 +19,32 @@ por_genero:
     - ghost
     - supernatural
     - scary
-    - frightening
     - creepy
     - dark fiction
     - gothic
+    - occult
+    - demonic
+    - possession
+    - vampire
+    - werewolf
+    - zombie
+    - serial killer
+    - psychological horror
   suspense:
     - suspense
     - tensão
     - thriller psicológico
     - angústia
-    - cliffhanger
     - psychological
     - tension
+    - suspenseful
   thriller:
     - thriller
     - conspiração
     - espionagem
     - perseguição
-    - assassino
-    - serial killer
-    - mystery thriller
     - crime thriller
+    - mystery thriller
   misterio:
     - mistério
     - detetive
@@ -51,6 +55,7 @@ por_genero:
     - mystery
     - detective
     - investigation
+    - cozy mystery
   weird_fiction:
     - weird fiction
     - estranheza
@@ -61,32 +66,34 @@ por_genero:
     - cthulhu
     - eldritch
     - cosmic
+    - body horror
   true_crime:
     - true crime
     - crime real
-    - documentário criminal
     - caso real
     - assassinato real
 
+# Palavras-chave de evento — usadas para classificação da categoria
 por_evento:
   lancamento:
     - lançamento
     - lança
     - publicação
-    - estreia
-    - disponível
     - chega às livrarias
     - pré-venda
     - pré-lançamento
     - data de lançamento
+    - novo livro de
+    - novo romance de
     - release
-    - publishing
     - new book
     - coming soon
     - out now
     - book release
     - announced
     - debut novel
+    - publishing
+    - will be published
   traducao:
     - tradução
     - traduzido
@@ -101,20 +108,40 @@ por_evento:
     - translated
     - portuguese edition
     - rights acquired
+    - brazilian edition
+  resenha:
+    - resenha
+    - review
+    - análise
+    - opinião sobre
+    - leitura de
+    - li e
+    - acabei de ler
+    - minha opinião
+    - vale a pena ler
+    - recomendo
+    - não recomendo
   autor:
     - autor
     - escritor
     - estreia literária
-    - novo livro
-    - obra inédita
     - debut
     - autor nacional
     - autor brasileiro
-    - autor internacional
     - author
     - writer
     - novelist
 
-# Limiar de confiança — muito baixo para aprovação automática
-# Qualquer notícia com ao menos uma keyword relevante é aprovada
+# Palavras que indicam conteúdo em inglês SEM relação com o Brasil
+# Usadas para penalizar o score de itens puramente em inglês
+palavras_ingles_puro:
+  - "the new novel"
+  - "american author"
+  - "uk publisher"
+  - "new york times"
+  - "bestseller list"
+  - "amazon.com"
+  - "barnes & noble"
+
+# Limiar de confiança
 limiar_confianca: 0.01
