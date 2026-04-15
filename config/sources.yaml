@@ -1,13 +1,14 @@
 # Fontes monitoradas pelo Coletor do Terrobook Portal
+# Foco: conteúdo em português sobre terror, suspense, thriller, mistério
 
 sources:
 
   # --- Editoras brasileiras ---
-  - id: darkside
-    nome: "Darkside Books"
-    url: "https://darksidebooks.com.br/feed/"
+  - id: darkside_blog
+    nome: "DarkSide Blog"
+    url: "https://darkside.blog.br/feed/"
     tipo: rss
-    ativo: false  # Bloqueia bots (Connection refused)
+    ativo: true
 
   - id: intrinseca
     nome: "Intrínseca"
@@ -28,12 +29,6 @@ sources:
     tipo: rss
     ativo: true
 
-  - id: darkside_blog
-    nome: "Darkside Blog"
-    url: "https://darkside.blog.br/feed/"
-    tipo: rss
-    ativo: true
-
   - id: mundo_sombrio
     nome: "Mundo Sombrio"
     url: "https://mundosombrio.com.br/feed/"
@@ -47,45 +42,8 @@ sources:
     tipo: rss
     ativo: true
 
-  # --- Revistas e portais especializados internacionais ---
-  - id: tor_com_horror
-    nome: "Tor.com — Horror"
-    url: "https://www.tor.com/tag/horror/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: nightmare_magazine
-    nome: "Nightmare Magazine"
-    url: "https://www.nightmare-magazine.com/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: locus_magazine
-    nome: "Locus Magazine"
-    url: "https://locusmag.com/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: book_riot_horror
-    nome: "Book Riot — Horror"
-    url: "https://bookriot.com/tag/horror/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: grimoire_of_horror
-    nome: "Grimoire of Horror"
-    url: "https://www.grimoireofhorror.com/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: horror_news_net
-    nome: "Horror News Network"
-    url: "https://horrornews.net/feed/"
-    tipo: rss
-    ativo: true
-
-  - id: giant_freakin_robot_horror
-    nome: "Giant Freakin Robot — Horror"
-    url: "https://www.giantfreakinrobot.com/topic/horror/feed"
+  - id: cbl
+    nome: "CBL — Câmara Brasileira do Livro"
+    url: "https://cbl.org.br/feed/"
     tipo: rss
     ativo: true

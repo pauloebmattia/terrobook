@@ -15,14 +15,27 @@ class Curador:
         self.config = config
 
     def evaluate(self, noticia: Noticia) -> ResultadoCuradoria:
-        """Avalia uma notícia e retorna classificação + pontuação.
+        """Avalia uma notícia e retorna classificação + pontuação."""
 
-        Regras:
-        - score == 0.0 → DESCARTADO, motivo_rejeicao preenchido
-        - 0 < score < limiar_confianca → PENDENTE_REVISAO, categoria preenchida
-        - score >= limiar_confianca → APROVADO, categoria preenchida
-        - classify() retorna None mas score > 0 → usa Categoria.NOTICIA_GERAL
-        """
+        # Filtro de filmes/séries: descartar posts sobre adaptações que não mencionam livros
+        texto_lower = (noticia.titulo + " " + noticia.texto_resumido).lower()
+        _TERMOS_MIDIA = ["filme", "série", "séries", "cinema", "netflix", "streaming",
+                         "trailer", "elenco", "ator", "atriz", "diretor", "episódio",
+                         "temporada", "movie", "film", "series", "tv show", "television"]
+        _TERMOS_LIVRO = ["livro", "livros", "romance", "conto", "obra", "publicação",
+                         "lançamento", "edição", "autor", "autora", "editora", "leitura",
+                         "resenha", "book", "novel", "release", "publish"]
+        eh_midia = any(t in texto_lower for t in _TERMOS_MIDIA)
+        tem_livro = any(t in texto_lower for t in _TERMOS_LIVRO)
+        if eh_midia and not tem_livro:
+            return ResultadoCuradoria(
+                noticia=noticia,
+                status=StatusCuradoria.DESCARTADO,
+                score=0.0,
+                categoria=None,
+                motivo_rejeicao="Conteúdo sobre filme/série sem menção a livros",
+            )
+
         score = keyword_scorer.score(noticia, self.config)
         categoria = classifier.classify(noticia, self.config)
 
