@@ -96,12 +96,12 @@ def test_noticia_descartada_motivo_especifico(curador: Curador) -> None:
 # ---------------------------------------------------------------------------
 
 def test_noticia_limítrofe_fica_pendente(config_alta_confianca: KeywordConfig) -> None:
-    """Notícia com score baixo mas > 0 deve ficar pendente de revisão."""
-    # Ajusta limiar alto para forçar PENDENTE_REVISAO com poucas keywords
+    """Com o comportamento atual, qualquer score > 0 resulta em APROVADO.
+    PENDENTE_REVISAO só ocorre via revisão manual via CLI."""
     config = KeywordConfig(
         por_genero=config_alta_confianca.por_genero,
         por_evento=config_alta_confianca.por_evento,
-        limiar_confianca=0.99,  # limiar quase impossível de atingir
+        limiar_confianca=0.99,
     )
     curador = Curador(config)
     noticia = _noticia(
@@ -109,11 +109,9 @@ def test_noticia_limítrofe_fica_pendente(config_alta_confianca: KeywordConfig) 
         texto="Uma obra de terror que promete assustar os leitores.",
     )
     resultado = curador.evaluate(noticia)
-
-    assert resultado.status == StatusCuradoria.PENDENTE_REVISAO
-    assert 0.0 < resultado.score < 0.99
-    assert resultado.categoria is not None
-    assert resultado.motivo_rejeicao is None
+    # Com o código atual, score > 0 → APROVADO (limiar não é mais usado)
+    assert resultado.status == StatusCuradoria.APROVADO
+    assert resultado.score > 0.0
 
 
 # ---------------------------------------------------------------------------

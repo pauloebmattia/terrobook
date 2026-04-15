@@ -92,11 +92,12 @@ class TestRenderIndex:
             "novo",
             aprovado_em=datetime(2024, 6, 1, tzinfo=timezone.utc),
         )
-        # Passa em ordem inversa para garantir que o gerador ordena
         gerador.render_index([item_antigo, item_novo])
         html = (gerador.output_dir / "index.html").read_text(encoding="utf-8")
-        pos_novo = html.find("item-novo") if "item-novo" in html else html.find("/item/novo")
-        pos_antigo = html.find("item-antigo") if "item-antigo" in html else html.find("/item/antigo")
+        # O template usa link direto para a URL da notícia — verifica pela URL
+        pos_novo = html.find(item_novo.noticia.url)
+        pos_antigo = html.find(item_antigo.noticia.url)
+        assert pos_novo != -1 and pos_antigo != -1, "Ambas as URLs devem aparecer no HTML"
         assert pos_novo < pos_antigo, "Item mais novo deve aparecer antes do mais antigo"
 
 

@@ -26,11 +26,9 @@ def load_text(path):
 # ---------------------------------------------------------------------------
 
 CATEGORIAS_ESPERADAS = {
-    "editoras_br": ["darkside", "intrinseca", "aleph", "novo_seculo"],
-    "portais_resenha": ["skoob_terror", "leitores_com_br"],
-    "blogs": ["medo_literatura", "biblioteca_do_terror"],
-    "redes_sociais": ["darkside_instagram"],
-    "agregadores_internacionais": ["publishers_weekly", "tor_com"],
+    "editoras_br": ["darkside", "intrinseca", "aleph", "novo_seculo", "darkside_blog", "rocco"],
+    "blogs_terror": ["biblioteca_do_terror", "mundo_sombrio"],
+    "blogs_livros": ["leitor_compulsivo", "cbl"],
 }
 
 
@@ -127,10 +125,9 @@ def test_arquivo_de_deploy_existe(arquivo):
 # ---------------------------------------------------------------------------
 
 FONTES_POR_CATEGORIA = {
-    "editoras_br": ["darkside", "intrinseca", "aleph", "novo_seculo"],
-    "portais_resenha": ["skoob_terror", "leitores_com_br"],
-    "blogs": ["medo_literatura", "biblioteca_do_terror"],
-    "agregadores_internacionais": ["publishers_weekly", "tor_com"],
+    "editoras_br": ["darkside_blog", "intrinseca", "rocco"],
+    "blogs_terror": ["biblioteca_do_terror", "mundo_sombrio"],
+    "blogs_livros": ["leitor_compulsivo", "cbl"],
 }
 
 
