@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<meta name="description" content="Notícias de Lançamento Previsto no Terrobook Portal — curadoria de terror, suspense, thriller, mistério, weird fiction e true crime em português.">
+
+  <title>Lançamento Previsto — Terrobook Portal</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0d0d;
+      --bg-card:   #161616;
+      --bg-nav:    #111111;
+      --text:      #e0e0e0;
+      --text-muted:#9a9a9a;
+      --accent:    #8b0000;
+      --accent-lt: #c0392b;
+      --border:    #2a2a2a;
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans:  'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--accent-lt); text-decoration: none; }
+    a:hover { color: var(--text); text-decoration: underline; }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ── Layout ── */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    main { flex: 1; padding: 2rem 0; }
+
+    /* ── Header & Nav ── */
+    header {
+      background-color: var(--bg-nav);
+      border-bottom: 2px solid var(--accent);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--accent-lt);
+      letter-spacing: 0.03em;
+    }
+
+    .site-title a { color: inherit; }
+    .site-title a:hover { text-decoration: none; opacity: 0.85; }
+
+    nav { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+
+    nav a {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 3px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    nav a:hover {
+      background-color: var(--accent);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    .nav-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.4rem;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 1.2rem;
+      background: var(--border);
+      margin: 0 0.4rem;
+      align-self: center;
+    }
+
+    /* ── Badges de categoria ── */
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .badge-traducao    { background: #4a0000; color: #ff9999; }
+    .badge-lancamento  { background: #003a1a; color: #7dffb3; }
+    .badge-autor-nac   { background: #1a2a00; color: #c8ff7d; }
+    .badge-autor-int   { background: #001a3a; color: #7db8ff; }
+    .badge-geral       { background: #2a1a00; color: #ffd07d; }
+
+    /* ── Cards de item ── */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: border-color 0.15s;
+    }
+
+    .item-card:hover { border-color: var(--accent); }
+
+    .item-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .item-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .item-title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      line-height: 1.35;
+    }
+
+    .item-title a { color: var(--text); }
+    .item-title a:hover { color: var(--accent-lt); text-decoration: none; }
+
+    .item-excerpt {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+
+    .item-readmore {
+      font-size: 0.82rem;
+      color: var(--accent-lt);
+      align-self: flex-start;
+    }
+
+    /* ── Página de detalhe ── */
+    .detail-header { margin-bottom: 1.5rem; }
+
+    .detail-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    .detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .detail-fields {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem 1.5rem;
+    }
+
+    .field-item { display: flex; flex-direction: column; gap: 0.15rem; }
+
+    .field-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .field-value { font-size: 0.95rem; }
+
+    .detail-sinopse {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      color: var(--text-muted);
+    }
+
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent);
+      color: var(--text);
+      padding: 0.55rem 1.1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+
+    .source-link:hover { background: var(--accent-lt); text-decoration: none; color: var(--text); }
+
+    /* ── Seção de relacionados ── */
+    .related-section { margin-top: 3rem; }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--accent-lt);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Página de categoria ── */
+    .page-heading {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .page-subheading {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── Gêneros (tags) ── */
+    .genre-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
+
+    .genre-tag {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      text-transform: capitalize;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background-color: var(--bg-nav);
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 0;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .footer-links { display: flex; gap: 1rem; }
+
+    .footer-links a { color: var(--text-muted); }
+    .footer-links a:hover { color: var(--accent-lt); }
+
+    /* ── Responsividade ── */
+    @media (max-width: 640px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      .site-title { font-size: 1.3rem; }
+      .detail-title { font-size: 1.5rem; }
+      .items-grid { grid-template-columns: 1fr; }
+      .detail-fields { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .items-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <div class="site-title"><a href="/terrobook/">☠ Terrobook</a></div>
+      <nav aria-label="Navegação principal">
+        <div class="nav-section">
+          <span class="nav-label">Categorias</span>
+          <a href="/terrobook/categoria/traducao-anunciada.html">Traduções</a>
+          <a href="/terrobook/categoria/lancamento-previsto.html">Lançamentos</a>
+          <a href="/terrobook/categoria/novo-autor-nacional.html">Autores Nacionais</a>
+          <a href="/terrobook/categoria/autor-internacional-pt.html">Autores Internacionais</a>
+          <a href="/terrobook/categoria/noticia-geral.html">Notícias Gerais</a>
+        </div>
+        <div class="nav-divider" aria-hidden="true"></div>
+        <div class="nav-section">
+          <span class="nav-label">Gêneros</span>
+          <a href="/terrobook/genero/terror.html">Terror</a>
+          <a href="/terrobook/genero/suspense.html">Suspense</a>
+          <a href="/terrobook/genero/thriller.html">Thriller</a>
+          <a href="/terrobook/genero/misterio.html">Mistério</a>
+          <a href="/terrobook/genero/weird_fiction.html">Weird Fiction</a>
+          <a href="/terrobook/genero/true_crime.html">True Crime</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      
+<section aria-labelledby="cat-heading">
+  <h1 id="cat-heading" class="page-heading">Lançamento Previsto</h1>
+  <p class="page-subheading">
+    
+      36 items encontrados.
+    
+  </p>
+
+  
+  <div class="items-grid">
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://locusmag.com/2026/04/new-book-releases-april-14-2026/" target="_blank" rel="noopener noreferrer">New Book Releases: April 14, 2026</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Visit our bookshop.org page to purchase this week&#39;s new books and support your local bookstore. And us! Archer, Brooke: A Song in the Dark (Penguin Random House/Putnam...
+      </p>
+
+      <a class="item-readmore" href="https://locusmag.com/2026/04/new-book-releases-april-14-2026/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre New Book Releases: April 14, 2026">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://reactormag.com/scream-7-controversies-boycotts-explained/" target="_blank" rel="noopener noreferrer">The Many Controversies Haunting Scream 7‘s Release</a>
+      </h2>
+
+      <p class="item-excerpt">
+        How Scream 7 went from franchise sequel to one of the year&#39;s most controversial films The post The Many Controversies Haunting &lt;i&gt;Scream 7&lt;/i&gt;‘s Release appeared first on Reactor .
+      </p>
+
+      <a class="item-readmore" href="https://reactormag.com/scream-7-controversies-boycotts-explained/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre The Many Controversies Haunting Scream 7‘s Release">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://intrinseca.com.br/blog/2026/03/john-green-autor-de-a-culpa-e-das-estrelas-lancara-novo-romance-em-2026/" target="_blank" rel="noopener noreferrer">John Green | Autor de A culpa é das estrelas lançará novo romance em 2026</a>
+      </h2>
+
+      <p class="item-excerpt">
+        9 anos depois de sua última ficção, John Green retorna com história emocionante sobre amor, trauma e fama O post John Green | Autor de A culpa é das estrelas lançará novo...
+      </p>
+
+      <a class="item-readmore" href="https://intrinseca.com.br/blog/2026/03/john-green-autor-de-a-culpa-e-das-estrelas-lancara-novo-romance-em-2026/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre John Green | Autor de A culpa é das estrelas lançará novo romance em 2026">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-nunca-assobie-a-noite-antologia-indigena-de-ficcao-fantastica-ancestral-por-shane-hawk-e-theodore-c-van-alst-jr-orgs/" target="_blank" rel="noopener noreferrer">Lançamento: Nunca Assobie à Noite: Antologia Indígena de Ficção Fantástica Ancestral, por Shane Hawk e Theodore C. Van Alst Jr. (orgs.)</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Muitos povos indígenas acreditam que nunca se deve assobiar à noite. Essa crença assume diversas formas: por exemplo, os nativos havaianos acreditam que isso invoca os...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-nunca-assobie-a-noite-antologia-indigena-de-ficcao-fantastica-ancestral-por-shane-hawk-e-theodore-c-van-alst-jr-orgs/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Nunca Assobie à Noite: Antologia Indígena de Ficção Fantástica Ancestral, por Shane Hawk e Theodore C. Van Alst Jr. (orgs.)">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://intrinseca.com.br/blog/2026/03/e-tempo-de-morangos-confira-as-fotos-da-sessao-de-autografos-no-rio-de-janeiro-2/" target="_blank" rel="noopener noreferrer">É tempo de morangos | Confira as fotos da sessão de autógrafos em São Paulo</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Evento de lançamento e sessão de autógrafos do livro “É tempo de morangos”, de Bruna Martiolli O post É tempo de morangos | Confira as fotos da sessão de autógrafos em São...
+      </p>
+
+      <a class="item-readmore" href="https://intrinseca.com.br/blog/2026/03/e-tempo-de-morangos-confira-as-fotos-da-sessao-de-autografos-no-rio-de-janeiro-2/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre É tempo de morangos | Confira as fotos da sessão de autógrafos em São Paulo">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://locusmag.com/2026/04/john-flanagan-1944-2026/" target="_blank" rel="noopener noreferrer">John Flanagan (1944–2026)</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Fantasy author John Flanagan, 81, died February 7 of complications from non-Hodgkin lymphoma. John Flanagan was born May 22, 1944 in Sydney, Australia. He worked in advertising...
+      </p>
+
+      <a class="item-readmore" href="https://locusmag.com/2026/04/john-flanagan-1944-2026/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre John Flanagan (1944–2026)">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://intrinseca.com.br/blog/2026/04/jose-roberto-de-castro-neves-novo-romance-de-imortal-da-abl-chega-em-maio/" target="_blank" rel="noopener noreferrer">José Roberto de Castro Neves Novo romance de imortal da ABL chega em maio</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Autor de Ozymandias, José Roberto de Castro Neves reimagina a Copa de 1982 em romance metalinguístico que fala de memória e amor O post José Roberto de Castro Neves Novo...
+      </p>
+
+      <a class="item-readmore" href="https://intrinseca.com.br/blog/2026/04/jose-roberto-de-castro-neves-novo-romance-de-imortal-da-abl-chega-em-maio/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre José Roberto de Castro Neves Novo romance de imortal da ABL chega em maio">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-uma-estrada-para-o-inferno-por-jack-ketchum/" target="_blank" rel="noopener noreferrer">Lançamento: Uma Estrada para o Inferno, por Jack Ketchum</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Carol conseguiu sair. Encerrou um casamento marcado por anos de violência física e emocional, de controle, medo e desgaste — mas percebeu que se distanciar, simplesmente, não...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-uma-estrada-para-o-inferno-por-jack-ketchum/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Uma Estrada para o Inferno, por Jack Ketchum">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://www.bibliotecadoterror.com.br/2023/09/o-exorcista-segredos-e-devocao-darkside.html" target="_blank" rel="noopener noreferrer">O Exorcista: Segredos e Devoção | Darkside publica livro que disseca o clássico de William Peter Blatty e William Friedkin</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Poucas histórias de terror deixaram cicatrizes tão profundas no imaginário popular para que a simples menção de seu título seja capaz de causar arrepios no mais corajoso dos...
+      </p>
+
+      <a class="item-readmore" href="https://www.bibliotecadoterror.com.br/2023/09/o-exorcista-segredos-e-devocao-darkside.html" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre O Exorcista: Segredos e Devoção | Darkside publica livro que disseca o clássico de William Peter Blatty e William Friedkin">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://locusmag.com/2026/04/new-books-video-releases-of-the-week-april-7-2026/" target="_blank" rel="noopener noreferrer">New Books Video: Releases of the Week! April 7, 2026</a>
+      </h2>
+
+      <p class="item-excerpt">
+        The wait is finally over today, April 8, 2026, as we pull back the curtain on the most thrilling weekly arrivals in the Science Fiction, Fantasy, Horror, and Young Adult...
+      </p>
+
+      <a class="item-readmore" href="https://locusmag.com/2026/04/new-books-video-releases-of-the-week-april-7-2026/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre New Books Video: Releases of the Week! April 7, 2026">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-nunca-assobie-a-noite-antologia-indigena-de-ficcao-fantastica-ancestral-por-shane-hawk-e-theodore-c-van-alst-jr-orgs/" target="_blank" rel="noopener noreferrer">Lançamento: Nunca Assobie à Noite: Antologia Indígena de Ficção Fantástica Ancestral, por Shane Hawk e Theodore C. Van Alst Jr. (orgs.)</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Muitos povos indígenas acreditam que nunca se deve assobiar à noite. Essa crença assume diversas formas: por exemplo, os nativos havaianos acreditam que isso invoca os...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-nunca-assobie-a-noite-antologia-indigena-de-ficcao-fantastica-ancestral-por-shane-hawk-e-theodore-c-van-alst-jr-orgs/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Nunca Assobie à Noite: Antologia Indígena de Ficção Fantástica Ancestral, por Shane Hawk e Theodore C. Van Alst Jr. (orgs.)">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://www.mundosombrio.com.br/noticias-assustadoras/barbie-macabra-mattel-lanca-boneca-annabelle-de-invocacao-do-mal/" target="_blank" rel="noopener noreferrer">“Barbie macabra”? Mattel lança boneca Annabelle, de Invocação do Mal</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Após o sucesso do live-action de Barbie, a Mattel, empresa que comercializa a boneca, tem anunciado uma série de lançamentos. Um deles… Leia o artigo completo em: “Barbie...
+      </p>
+
+      <a class="item-readmore" href="https://www.mundosombrio.com.br/noticias-assustadoras/barbie-macabra-mattel-lanca-boneca-annabelle-de-invocacao-do-mal/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre “Barbie macabra”? Mattel lança boneca Annabelle, de Invocação do Mal">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://rocco.com.br/vem-ai-quinto-volume-da-serie-jogos-vorazes-amanhecer-na-colheita/" target="_blank" rel="noopener noreferrer">Vem aí quinto volume da série Jogos Vorazes: “Amanhecer na colheita”</a>
+      </h2>
+
+      <p class="item-excerpt">
+        ✨ Prepare-se para voltar ao mundo de Panem! ✨ Os fãs de Jogos Vorazes podem comemorar: o quinto volume da série, “Amanhecer na Colheita”, está chegando! E para dar um gostinho...
+      </p>
+
+      <a class="item-readmore" href="https://rocco.com.br/vem-ai-quinto-volume-da-serie-jogos-vorazes-amanhecer-na-colheita/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Vem aí quinto volume da série Jogos Vorazes: “Amanhecer na colheita”">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://intrinseca.com.br/blog/2026/03/e-tempo-de-morangos-confira-as-fotos-da-sessao-de-autografos-no-rio-de-janeiro/" target="_blank" rel="noopener noreferrer">É tempo de morangos | Confira as fotos da sessão de autógrafos no Rio de Janeiro</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Evento de lançamento e sessão de autógrafos do livro “É tempo de morangos”, de Bruna Martiolli O post É tempo de morangos | Confira as fotos da sessão de autógrafos no Rio de...
+      </p>
+
+      <a class="item-readmore" href="https://intrinseca.com.br/blog/2026/03/e-tempo-de-morangos-confira-as-fotos-da-sessao-de-autografos-no-rio-de-janeiro/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre É tempo de morangos | Confira as fotos da sessão de autógrafos no Rio de Janeiro">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-voce-me-matou-antes-por-john-marrs/" target="_blank" rel="noopener noreferrer">Lançamento: Você Me Matou Antes, por John Marrs</a>
+      </h2>
+
+      <p class="item-excerpt">
+        É 5 de novembro, quando se comemora na Inglaterra a Noite da Fogueira, e uma mulher acorda em um pesadelo. Amarrada e amordaçada, ela está presa no meio de uma fogueira...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-voce-me-matou-antes-por-john-marrs/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Você Me Matou Antes, por John Marrs">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://intrinseca.com.br/blog/2026/04/lancamentos-de-abril-9/" target="_blank" rel="noopener noreferrer">Lançamentos de abril</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Prepare sua lista de livros desejados e venha conferir os lançamentos que chegam pela Intrínseca em abril O post Lançamentos de abril apareceu primeiro em Editora Intrínseca .
+      </p>
+
+      <a class="item-readmore" href="https://intrinseca.com.br/blog/2026/04/lancamentos-de-abril-9/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamentos de abril">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-voce-me-matou-antes-por-john-marrs/" target="_blank" rel="noopener noreferrer">Lançamento: Você Me Matou Antes, por John Marrs</a>
+      </h2>
+
+      <p class="item-excerpt">
+        É 5 de novembro, quando se comemora na Inglaterra a Noite da Fogueira, e uma mulher acorda em um pesadelo. Amarrada e amordaçada, ela está presa no meio de uma fogueira...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-voce-me-matou-antes-por-john-marrs/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Você Me Matou Antes, por John Marrs">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://www.bibliotecadoterror.com.br/2023/08/spin-black-yarn-novo-livro-de-josh.html" target="_blank" rel="noopener noreferrer">Spin a Black Yarn | Novo livro de Josh Malerman traz cinco novelas que misturam horror e ficção científica</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Spin a Black Yarn é o novo livro de Josh Malerman, autor de Caixa de Pássaros e Inspeção, uma coleção de cinco novelas que misturam horror e ficção científica. Sua primeira...
+      </p>
+
+      <a class="item-readmore" href="https://www.bibliotecadoterror.com.br/2023/08/spin-black-yarn-novo-livro-de-josh.html" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Spin a Black Yarn | Novo livro de Josh Malerman traz cinco novelas que misturam horror e ficção científica">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://cbl.org.br/2026/03/camara-brasileira-do-livro-lanca-campanha-nacional-e-cria-fundo-patrimonial-para-valorizar-o-livro-no-brasil/" target="_blank" rel="noopener noreferrer">Câmara Brasileira do Livro lança campanha nacional e cria fundo patrimonial para valorizar o livro no Brasil</a>
+      </h2>
+
+      <p class="item-excerpt">
+        “Meu Livro, Meu Estilo” marca nova fase da CBL e coloca livros e autores de volta à conversa; campanha foi criada em parceria com a AlmapBBDO A Câmara Brasileira do Livro (CBL)...
+      </p>
+
+      <a class="item-readmore" href="https://cbl.org.br/2026/03/camara-brasileira-do-livro-lanca-campanha-nacional-e-cria-fundo-patrimonial-para-valorizar-o-livro-no-brasil/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Câmara Brasileira do Livro lança campanha nacional e cria fundo patrimonial para valorizar o livro no Brasil">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://www.bibliotecadoterror.com.br/2023/09/o-exorcista-segredos-e-devocao-darkside.html" target="_blank" rel="noopener noreferrer">O Exorcista: Segredos e Devoção | Darkside publica livro que disseca o clássico de William Peter Blatty e William Friedkin</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Poucas histórias de terror deixaram cicatrizes tão profundas no imaginário popular para que a simples menção de seu título seja capaz de causar arrepios no mais corajoso dos...
+      </p>
+
+      <a class="item-readmore" href="https://www.bibliotecadoterror.com.br/2023/09/o-exorcista-segredos-e-devocao-darkside.html" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre O Exorcista: Segredos e Devoção | Darkside publica livro que disseca o clássico de William Peter Blatty e William Friedkin">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-cacador-de-cacadores-por-stephen-graham-jones/" target="_blank" rel="noopener noreferrer">Lançamento: Caçador de Caçadores, por Stephen Graham Jones</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Durante a reforma de uma casa paroquial em 2012, é encontrado no interior de uma parede o diário escrito pelo pastor luterano Arthur Beaucarne em 1912. Em suas páginas está...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-cacador-de-cacadores-por-stephen-graham-jones/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Caçador de Caçadores, por Stephen Graham Jones">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://locusmag.com/2026/04/anathema-spec-from-the-margins-relaunches/" target="_blank" rel="noopener noreferrer">Anathema: Spec from the Margins Relaunches</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Anathema : Spec from the Margins , a speculative fiction magazine by and for queer people of color, has announced that it is relaunching after a four-year hiatus. We&#39;re...
+      </p>
+
+      <a class="item-readmore" href="https://locusmag.com/2026/04/anathema-spec-from-the-margins-relaunches/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Anathema: Spec from the Margins Relaunches">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-vertigo-um-corpo-que-cai-por-pierre-boileau-e-thomas-narcejac/" target="_blank" rel="noopener noreferrer">Lançamento: Vertigo: Um Corpo que Cai, por Pierre Boileau e Thomas Narcejac</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Um homem é contratado para vigiar a esposa de um velho amigo. À primeira vista, não há motivo. Nenhuma doença. Nenhuma traição. Nenhuma explicação plausível. Ainda assim, algo...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-vertigo-um-corpo-que-cai-por-pierre-boileau-e-thomas-narcejac/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Vertigo: Um Corpo que Cai, por Pierre Boileau e Thomas Narcejac">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://intrinseca.com.br/blog/2026/03/mais-foco-menos-ansiedade-confira-o-novo-livro-de-rafael-gratta/" target="_blank" rel="noopener noreferrer">Mais foco, menos ansiedade | Confira o novo livro de Rafael Gratta</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Com mais de 3,6 milhões de seguidores no Instagram, Rafael Gratta apresenta métodos que mudaram a vida dele e agora vão mudar a sua O post Mais foco, menos ansiedade | Confira...
+      </p>
+
+      <a class="item-readmore" href="https://intrinseca.com.br/blog/2026/03/mais-foco-menos-ansiedade-confira-o-novo-livro-de-rafael-gratta/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Mais foco, menos ansiedade | Confira o novo livro de Rafael Gratta">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-cacador-de-cacadores-por-stephen-graham-jones/" target="_blank" rel="noopener noreferrer">Lançamento: Caçador de Caçadores, por Stephen Graham Jones</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Durante a reforma de uma casa paroquial em 2012, é encontrado no interior de uma parede o diário escrito pelo pastor luterano Arthur Beaucarne em 1912. Em suas páginas está...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-cacador-de-cacadores-por-stephen-graham-jones/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Caçador de Caçadores, por Stephen Graham Jones">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://locusmag.com/2026/04/mcsweeney-receives-windham-campbell-prize/" target="_blank" rel="noopener noreferrer">McSweeney Receives Windham-Campbell Prize</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Joyelle McSweeney, author of the poetry collection Death Styles (Nightboat) [amazon / bookshop], is among the recipients announced for the 2026 Donald Windham-Sandy M. Campbell...
+      </p>
+
+      <a class="item-readmore" href="https://locusmag.com/2026/04/mcsweeney-receives-windham-campbell-prize/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre McSweeney Receives Windham-Campbell Prize">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://locusmag.com/2026/04/2026-top-ten-finalists-for-locus-awards/" target="_blank" rel="noopener noreferrer">2026 Locus Awards Top Ten Finalists</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Congratulations to all of the Locus Awards top ten finalists! These results are from the February 1 to April 1 voting by readers on an open public ballot. The Locus Awards...
+      </p>
+
+      <a class="item-readmore" href="https://locusmag.com/2026/04/2026-top-ten-finalists-for-locus-awards/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre 2026 Locus Awards Top Ten Finalists">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://cbl.org.br/2026/03/camara-brasileira-do-livro-lanca-campanha-nacional-e-cria-fundo-patrimonial-para-valorizar-o-livro-no-brasil/" target="_blank" rel="noopener noreferrer">Câmara Brasileira do Livro lança campanha nacional e cria fundo patrimonial para valorizar o livro no Brasil</a>
+      </h2>
+
+      <p class="item-excerpt">
+        “Meu Livro, Meu Estilo” marca nova fase da CBL e coloca livros e autores de volta à conversa; campanha foi criada em parceria com a AlmapBBDO A Câmara Brasileira do Livro (CBL)...
+      </p>
+
+      <a class="item-readmore" href="https://cbl.org.br/2026/03/camara-brasileira-do-livro-lanca-campanha-nacional-e-cria-fundo-patrimonial-para-valorizar-o-livro-no-brasil/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Câmara Brasileira do Livro lança campanha nacional e cria fundo patrimonial para valorizar o livro no Brasil">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-uma-estrada-para-o-inferno-por-jack-ketchum/" target="_blank" rel="noopener noreferrer">Lançamento: Uma Estrada para o Inferno, por Jack Ketchum</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Carol conseguiu sair. Encerrou um casamento marcado por anos de violência física e emocional, de controle, medo e desgaste — mas percebeu que se distanciar, simplesmente, não...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-uma-estrada-para-o-inferno-por-jack-ketchum/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Uma Estrada para o Inferno, por Jack Ketchum">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-garotos-selvagens-um-livro-dos-mortos-por-william-s-burroughs/" target="_blank" rel="noopener noreferrer">Lançamento: Garotos Selvagens: Um Livro dos Mortos, por William S. Burroughs</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Reconhecidamente uma das obras seminais de William Burroughs, Garotos Selvagens: Um Livro dos Mortos apresenta, com uma linguagem desconcertante e ousada, uma realidade...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-garotos-selvagens-um-livro-dos-mortos-por-william-s-burroughs/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Garotos Selvagens: Um Livro dos Mortos, por William S. Burroughs">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-garotos-selvagens-um-livro-dos-mortos-por-william-s-burroughs/" target="_blank" rel="noopener noreferrer">Lançamento: Garotos Selvagens: Um Livro dos Mortos, por William S. Burroughs</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Reconhecidamente uma das obras seminais de William Burroughs, Garotos Selvagens: Um Livro dos Mortos apresenta, com uma linguagem desconcertante e ousada, uma realidade...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-garotos-selvagens-um-livro-dos-mortos-por-william-s-burroughs/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Garotos Selvagens: Um Livro dos Mortos, por William S. Burroughs">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-vertigo-um-corpo-que-cai-por-pierre-boileau-e-thomas-narcejac/" target="_blank" rel="noopener noreferrer">Lançamento: Vertigo: Um Corpo que Cai, por Pierre Boileau e Thomas Narcejac</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Um homem é contratado para vigiar a esposa de um velho amigo. À primeira vista, não há motivo. Nenhuma doença. Nenhuma traição. Nenhuma explicação plausível. Ainda assim, algo...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-vertigo-um-corpo-que-cai-por-pierre-boileau-e-thomas-narcejac/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Vertigo: Um Corpo que Cai, por Pierre Boileau e Thomas Narcejac">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-15">
+          15/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://www.bibliotecadoterror.com.br/2023/08/spin-black-yarn-novo-livro-de-josh.html" target="_blank" rel="noopener noreferrer">Spin a Black Yarn | Novo livro de Josh Malerman traz cinco novelas que misturam horror e ficção científica</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Spin a Black Yarn é o novo livro de Josh Malerman, autor de Caixa de Pássaros e Inspeção, uma coleção de cinco novelas que misturam horror e ficção científica. Sua primeira...
+      </p>
+
+      <a class="item-readmore" href="https://www.bibliotecadoterror.com.br/2023/08/spin-black-yarn-novo-livro-de-josh.html" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Spin a Black Yarn | Novo livro de Josh Malerman traz cinco novelas que misturam horror e ficção científica">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-19">
+          19/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-o-homem-invisivel-por-h-g-wells/" target="_blank" rel="noopener noreferrer">Lançamento: O Homem Invisível, por H.G. Wells</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Um homem misterioso chega a uma pousada numa pacata vila inglesa durante uma tempestade de neve. Ele usa luvas, chapéu de abas largas, um casaco de mangas compridas, e seu...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-o-homem-invisivel-por-h-g-wells/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: O Homem Invisível, por H.G. Wells">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-19">
+          19/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-noite-na-taverna-macario-por-alvares-de-azevedo/" target="_blank" rel="noopener noreferrer">Lançamento: Noite na Taverna &amp; Macário, por Álvares de Azevedo</a>
+      </h2>
+
+      <p class="item-excerpt">
+        Entre tavernas sombrias, pactos e confissões à beira do abismo, nasce uma das obras mais inquietantes da literatura brasileira. Álvares de Azevedo é um dos autores mais...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-noite-na-taverna-macario-por-alvares-de-azevedo/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Noite na Taverna &amp; Macário, por Álvares de Azevedo">
+        Ler na fonte →
+      </a>
+    </article>
+    
+    <article class="item-card">
+      <div class="item-card-meta">
+        <span class="badge badge-lancamento">
+          Lançamento Previsto
+        </span>
+        <time class="item-date" datetime="2026-04-19">
+          19/04/2026
+        </time>
+      </div>
+
+      
+
+      <h2 class="item-title">
+      <h2 class="item-title">
+        <a href="https://darkside.blog.br/lancamento-gotico-americano-por-vinicius-loureiro-org/" target="_blank" rel="noopener noreferrer">Lançamento: Gótico Americano, por Vinicius Loureiro (org.)</a>
+      </h2>
+
+      <p class="item-excerpt">
+        O romance gótico europeu forneceu ao nosso imaginário elementos até hoje comuns nas histórias de terror e mistério: castelos abandonados, nobres excêntricos, ambientes remotos...
+      </p>
+
+      <a class="item-readmore" href="https://darkside.blog.br/lancamento-gotico-americano-por-vinicius-loureiro-org/" target="_blank" rel="noopener noreferrer" aria-label="Ler mais sobre Lançamento: Gótico Americano, por Vinicius Loureiro (org.)">
+        Ler na fonte →
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© Terrobook Portal — curadoria literária de terror &amp; suspense</span>
+      <div class="footer-links">
+        <a href="/terrobook/feed.xml" title="Feed RSS">RSS</a>
+        <a href="/terrobook/api/items.json" title="JSON API">JSON API</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
