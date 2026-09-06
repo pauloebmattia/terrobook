@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<meta name="description" content="As últimas e pálidas listras de luz desapareceram rapidamente atrás da extensão da cidade naquela noite. A rua, ainda úmida de… Leia o artigo completo em: O...">
+
+  <title>O Perseguidor — Terrobook Portal</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0d0d;
+      --bg-card:   #161616;
+      --bg-nav:    #111111;
+      --text:      #e0e0e0;
+      --text-muted:#9a9a9a;
+      --accent:    #8b0000;
+      --accent-lt: #c0392b;
+      --border:    #2a2a2a;
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans:  'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--accent-lt); text-decoration: none; }
+    a:hover { color: var(--text); text-decoration: underline; }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ── Layout ── */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    main { flex: 1; padding: 2rem 0; }
+
+    /* ── Header & Nav ── */
+    header {
+      background-color: var(--bg-nav);
+      border-bottom: 2px solid var(--accent);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--accent-lt);
+      letter-spacing: 0.03em;
+    }
+
+    .site-title a { color: inherit; }
+    .site-title a:hover { text-decoration: none; opacity: 0.85; }
+
+    nav { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+
+    nav a {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 3px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    nav a:hover {
+      background-color: var(--accent);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    .nav-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.4rem;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 1.2rem;
+      background: var(--border);
+      margin: 0 0.4rem;
+      align-self: center;
+    }
+
+    /* ── Badges de categoria ── */
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .badge-traducao    { background: #4a0000; color: #ff9999; }
+    .badge-lancamento  { background: #003a1a; color: #7dffb3; }
+    .badge-autor-nac   { background: #1a2a00; color: #c8ff7d; }
+    .badge-autor-int   { background: #001a3a; color: #7db8ff; }
+    .badge-geral       { background: #2a1a00; color: #ffd07d; }
+
+    /* ── Cards de item ── */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: border-color 0.15s;
+    }
+
+    .item-card:hover { border-color: var(--accent); }
+
+    .item-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .item-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .item-title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      line-height: 1.35;
+    }
+
+    .item-title a { color: var(--text); }
+    .item-title a:hover { color: var(--accent-lt); text-decoration: none; }
+
+    .item-excerpt {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+
+    .item-readmore {
+      font-size: 0.82rem;
+      color: var(--accent-lt);
+      align-self: flex-start;
+    }
+
+    /* ── Página de detalhe ── */
+    .detail-header { margin-bottom: 1.5rem; }
+
+    .detail-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    .detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .detail-fields {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem 1.5rem;
+    }
+
+    .field-item { display: flex; flex-direction: column; gap: 0.15rem; }
+
+    .field-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .field-value { font-size: 0.95rem; }
+
+    .detail-sinopse {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      color: var(--text-muted);
+    }
+
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent);
+      color: var(--text);
+      padding: 0.55rem 1.1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+
+    .source-link:hover { background: var(--accent-lt); text-decoration: none; color: var(--text); }
+
+    /* ── Seção de relacionados ── */
+    .related-section { margin-top: 3rem; }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--accent-lt);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Página de categoria ── */
+    .page-heading {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .page-subheading {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── Gêneros (tags) ── */
+    .genre-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
+
+    .genre-tag {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      text-transform: capitalize;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background-color: var(--bg-nav);
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 0;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .footer-links { display: flex; gap: 1rem; }
+
+    .footer-links a { color: var(--text-muted); }
+    .footer-links a:hover { color: var(--accent-lt); }
+
+    /* ── Responsividade ── */
+    @media (max-width: 640px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      .site-title { font-size: 1.3rem; }
+      .detail-title { font-size: 1.5rem; }
+      .items-grid { grid-template-columns: 1fr; }
+      .detail-fields { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .items-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <div class="site-title"><a href="/terrobook/">☠ Terrobook</a></div>
+      <nav aria-label="Navegação principal">
+        <div class="nav-section">
+          <span class="nav-label">Categorias</span>
+          <a href="/terrobook/categoria/traducao-anunciada.html">Traduções</a>
+          <a href="/terrobook/categoria/lancamento-previsto.html">Lançamentos</a>
+          <a href="/terrobook/categoria/novo-autor-nacional.html">Autores Nacionais</a>
+          <a href="/terrobook/categoria/autor-internacional-pt.html">Autores Internacionais</a>
+          <a href="/terrobook/categoria/noticia-geral.html">Notícias Gerais</a>
+        </div>
+        <div class="nav-divider" aria-hidden="true"></div>
+        <div class="nav-section">
+          <span class="nav-label">Gêneros</span>
+          <a href="/terrobook/genero/terror.html">Terror</a>
+          <a href="/terrobook/genero/suspense.html">Suspense</a>
+          <a href="/terrobook/genero/thriller.html">Thriller</a>
+          <a href="/terrobook/genero/misterio.html">Mistério</a>
+          <a href="/terrobook/genero/weird_fiction.html">Weird Fiction</a>
+          <a href="/terrobook/genero/true_crime.html">True Crime</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      
+<article aria-labelledby="detail-title">
+
+  <header class="detail-header">
+    <div class="detail-meta">
+      <span class="badge badge-geral">
+        Notícia Geral do Gênero
+      </span>
+      <time datetime="2026-04-15">
+        15/04/2026
+      </time>
+      
+    </div>
+
+    <h1 id="detail-title" class="detail-title">O Perseguidor</h1>
+  </header>
+
+  
+  
+  
+
+  
+  
+
+  
+  <p style="margin-bottom: 1.5rem; line-height: 1.75;">
+    As últimas e pálidas listras de luz desapareceram rapidamente atrás da extensão da cidade naquela noite. A rua, ainda úmida de… Leia o artigo completo em: O Perseguidor
+  </p>
+
+  
+  <a class="source-link" href="https://www.mundosombrio.com.br/historias-de-terror/perseguidor/" target="_blank" rel="noopener noreferrer">
+    ↗ Ver fonte original
+  </a>
+
+</article>
+
+
+
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© Terrobook Portal — curadoria literária de terror &amp; suspense</span>
+      <div class="footer-links">
+        <a href="/terrobook/feed.xml" title="Feed RSS">RSS</a>
+        <a href="/terrobook/api/items.json" title="JSON API">JSON API</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
